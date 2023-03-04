@@ -12,13 +12,24 @@ def random_predict(number: int = 1) -> int:
     """
 
     count = 0
+    count_less = 0
+    count_more = 0
+    border_floor = 1
+    border_ceil = 101
 
     while True:
         count += 1
-        predict_number = np.random.randint(1, 101)  # предполагаемое число
+        predict_number = np.random.randint(
+            border_floor, border_ceil)  # предполагаемое число
         if number == predict_number:
             break  # выход из цикла, если угадали
-    return (count)
+        elif number > predict_number:
+            count_less += 1
+            border_floor = predict_number
+        else:
+            count_more += 1
+            border_ceil = predict_number
+    return count
 
 
 def score_game(random_predict) -> int:
